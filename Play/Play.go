@@ -6,9 +6,12 @@ func main () {
 
 	mySlice := make([] int, 5)
 
-	for i,v := range mySlice {
+	for i := range mySlice {
 		mySlice[i] = i
-		fmt.Println(v)
+	}
+
+	for i:=2; i != len(mySlice); i++ {
+		print(mySlice[i])
 	}
 
 	fmt.Print(mySlice)
