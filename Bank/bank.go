@@ -1,38 +1,14 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"os"
-	"strconv"
+	"example/bank/fileOps"
 )
 
 const accountBalanceFile = "balance.txt"
 
-func getFloatFromFile (fileName string) (float64, error) {
-	data, err := os.ReadFile(fileName)
-
-	if err != nil {
-		return 1000, errors.New("Failed to find file")
-	}
-
-	valueText := string(data)
-	value, err := strconv.ParseFloat(valueText, 64)
-
-	if err != nil {
-		return 1000, errors.New("Failed to parse stored value")
-	}
-
-	return value, nil
-}
-
-func writeFloatToFile (value float64, fileName string) {
-	valueText := fmt.Sprint(value)
-	os.WriteFile(fileName, []byte(valueText), 0644)
-}
-
 func main(){
-	accountBalance, err := getFloatFromFile(accountBalanceFile)
+	accountBalance, err := fileOps.GetFloatFromFile(accountBalanceFile)
 
 	if err != nil {
 		fmt.Println("ERROR")
@@ -66,7 +42,7 @@ func main(){
 				}
 				accountBalance += depositAmount
 				fmt.Println("Balance updated! New amount:", accountBalance)
-				writeFloatToFile(accountBalance, accountBalanceFile)
+				fileOps.WriteFloatToFile(accountBalance, accountBalanceFile)
 
 			case 3:
 				fmt.Print("Amount to withdraw? ")
@@ -82,7 +58,7 @@ func main(){
 				}
 				accountBalance -= withdrawlAmount
 				fmt.Println("Balance updated! New amount:", accountBalance)
-				writeFloatToFile(accountBalance, accountBalanceFile)
+				fileOps.WriteFloatToFile(accountBalance, accountBalanceFile)
 
 			default:
 				fmt.Println("Goodbye!")
