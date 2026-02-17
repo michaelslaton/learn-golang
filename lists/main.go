@@ -24,4 +24,14 @@ func main(){
 	courseRatings["react"] = 4.8
 	courseRatings["angular"] = 4.7
 	courseRatings.output()
+
+	for i,v := range userNames {
+		fmt.Println("Index: ", i)
+		fmt.Println("Value: ", v)
+	}
+
+	for k,v := range courseRatings {
+		fmt.Println("Index: ", k)
+		fmt.Println("Value: ", v)
+	}
 }
