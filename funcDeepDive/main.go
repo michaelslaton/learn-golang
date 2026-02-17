@@ -2,52 +2,22 @@ package main
 
 import "fmt"
 
-type transformFn func(int) int
-
-// type anotherFn func(int, []string, map[string][]int) ([]int, string)
-
 func main() {
-	numbers := []int{1, 2, 3, 4}
-	moreNumbers := []int{5,1,2}
+	numbers := []int{1, 2, 3}
 
-	doubled := transformNumbers(&numbers, double)
-	tripled := transformNumbers(&numbers, triple)
+	transformed := transformNumbers(&numbers, func(number int) int {
+		return number*2
+	})
 
-
-	fmt.Println(doubled)
-	fmt.Println(tripled)
-
-	transformerFn1 := getTransformerFunction(&numbers)
-	transformerFn2 := getTransformerFunction(&moreNumbers)
-	transformedNumbers := transformNumbers(&numbers, transformerFn1)
-	moreTransformedNumbers := transformNumbers(&moreNumbers, transformerFn2)
-
-
-	fmt.Println(transformedNumbers)
-	fmt.Println(moreTransformedNumbers)
+	fmt.Println(transformed)
 }
 
-func transformNumbers(numbers *[]int, transform transformFn) []int {
+func transformNumbers(numbers *[]int, transform func(int) int) []int {
 	dNumbers := []int{}
+
 	for _, val := range *numbers {
 		dNumbers = append(dNumbers, transform(val))
 	}
 
 	return dNumbers
-}
-
-func getTransformerFunction(nums *[]int) transformFn {
-	if (*nums)[0] == 1 {
-		return double
-	} else {
-		return triple
-	}
-}
-
-func double(num int) int {
-	return num * 2
-}
-
-func triple(num int) int {
-	return num * 3
 }

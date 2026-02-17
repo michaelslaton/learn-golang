@@ -1,0 +1,53 @@
+package functionvalues
+
+import "fmt"
+
+type transformFn func(int) int
+
+// type anotherFn func(int, []string, map[string][]int) ([]int, string)
+
+func functionvalues() {
+	numbers := []int{1, 2, 3, 4}
+	moreNumbers := []int{5,1,2}
+
+	doubled := transformNumbers(&numbers, double)
+	tripled := transformNumbers(&numbers, triple)
+
+
+	fmt.Println(doubled)
+	fmt.Println(tripled)
+
+	transformerFn1 := getTransformerFunction(&numbers)
+	transformerFn2 := getTransformerFunction(&moreNumbers)
+	transformedNumbers := transformNumbers(&numbers, transformerFn1)
+	moreTransformedNumbers := transformNumbers(&moreNumbers, transformerFn2)
+
+
+	fmt.Println(transformedNumbers)
+	fmt.Println(moreTransformedNumbers)
+}
+
+func transformNumbers(numbers *[]int, transform transformFn) []int {
+	dNumbers := []int{}
+	for _, val := range *numbers {
+		dNumbers = append(dNumbers, transform(val))
+	}
+
+	return dNumbers
+}
+
+func getTransformerFunction(nums *[]int) transformFn {
+	if (*nums)[0] == 1 {
+		return double
+	} else {
+		return triple
+	}
+}
+
+func double(num int) int {
+	return num * 2
+}
+
+func triple(num int) int {
+	return num * 3
+}
