@@ -2,17 +2,16 @@ package main
 
 import "fmt"
 
-func main() {
-	websites := map[string]string{
-		"Google":              "http://google.com",
-		"Amazon Web Services": "http://aws.com",
-	}
-	fmt.Println(websites)
-	fmt.Println(websites["Amazon Web Services"])
+// import "fmt"
 
-	websites["LinkedIn"] = "http://linkedin.com"
-	fmt.Println(websites)
+func main(){
+	userNames := make([]string, 2, 5)
 
-	delete(websites, "Google")
-	fmt.Println(websites)
+	userNames[0] = "Julie"
+	userNames[1] = "Barbara"
+
+	userNames = append(userNames, "Max")
+	userNames = append(userNames, "Manuel")
+
+	fmt.Println(userNames)
 }
